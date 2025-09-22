@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using MoneyManager.Application.Abstractions.Persistence;
+using MoneyManager.Infrastructure.Persistence;
 using MoneyManager.Infrastructure.Repositories;
 
 namespace MoneyManager.Infrastructure;
@@ -11,6 +12,8 @@ public static class DependencyInjection
     {
         services.AddDbContext<AppDbContext>(opt => opt.UseNpgsql(connectionString));
         services.AddScoped(typeof(IWriteRepository<>), typeof(EfWriteRepository<>));
+        services.AddScoped(typeof(IReadRepository<>), typeof(EfReadRepository<>));
+        services.AddScoped<IUnitOfWork, EfUnitOfWork>();
         
         return services;
     }
