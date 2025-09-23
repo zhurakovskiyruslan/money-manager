@@ -29,7 +29,7 @@ public class AppDbContext : DbContext
             entity.HasIndex(a => new { a.UserId, a.Title }).IsUnique();
 
             entity.Property(a => a.Title).IsRequired().HasMaxLength(100);
-            entity.Property(a => a.Currency).IsRequired().HasMaxLength(3);
+            entity.Property(a => a.Currency).IsRequired().HasMaxLength(4);
             entity.Property(a => a.Balance).HasPrecision(18, 2);
             entity.Property(a => a.Type).HasConversion<string>();
 
