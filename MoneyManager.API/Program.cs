@@ -7,8 +7,9 @@
     using MoneyManager.Application.Common.Behaviors;
     using MoneyManager.Infrastructure;
 
+    
     var builder = WebApplication.CreateBuilder(args);
-
+    
     builder.Services.AddControllers();
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
@@ -19,10 +20,9 @@
     
     builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
     
-    var connectionString = "Host=localhost;Port=5432;Database=MoneyManager;Username=postgres;Password=superuser";
-                           
-
-    builder.Services.AddInfrastructure(connectionString);
+    var cs = builder.Configuration.GetConnectionString("DefaultConnection")
+             ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+    builder.Services.AddInfrastructure(cs);
 
     var app = builder.Build();
 
