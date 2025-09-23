@@ -1,5 +1,6 @@
 using MediatR;
 using MoneyManager.Application.Abstractions.Persistence;
+using MoneyManager.Application.Common.Exceptions;
 using MoneyManager.Domain.Entities;
 
 namespace MoneyManager.Application.Accounts.Commands.UpdateAccount;
@@ -20,9 +21,9 @@ public class UpdateAccountHandler : IRequestHandler<UpdateAccountCommand, Guid>
     {
         var account = await _readRepo.GetByIdAsync(request.Id, ct);
         if (account == null)
-            throw new Exception("Account not found");
+            throw new NotFoundException("Account not found");
         if (account.UserId != request.UserId)
-            throw new Exception("No access to this account.");
+            throw new ForbiddenException("No access to this account.");
         account.Title = request.Title;
         account.Type = request.Type;
         account.Currency = request.Currency;
