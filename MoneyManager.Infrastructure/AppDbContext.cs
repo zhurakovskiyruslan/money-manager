@@ -48,7 +48,7 @@ public class AppDbContext : DbContext
             entity.HasOne(t => t.Account)
                 .WithMany(a => a.Transactions)
                 .HasForeignKey(t => t.AccountId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
 
             entity.HasOne(t => t.SharedCategory)
                 .WithMany(c => c.Transactions)
