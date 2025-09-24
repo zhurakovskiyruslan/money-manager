@@ -22,7 +22,7 @@ public class DeleteAccountHandler : IRequestHandler<DeleteAccountCommand, Unit>
     public async Task<Unit> Handle(DeleteAccountCommand request, CancellationToken ct)
     {
         var account = await _read.GetByIdAsync(request.Id, ct);
-        if (account == null) throw new NotFoundException($"{request.Id} not found");
+        if (account == null) throw new NotFoundException($"Account not found");
         _write.Remove(account);
         await _uow.SaveChangesAsync(ct);
         return Unit.Value;
