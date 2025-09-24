@@ -1,5 +1,6 @@
 using FluentValidation;
 using MediatR;
+using MoneyManager.Application.Common.Exceptions;
 
 namespace MoneyManager.Application.Common.Behaviors;
 
@@ -21,7 +22,7 @@ public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TReques
                 .ToList();
 
             if (failures.Count > 0)
-                throw new ValidationException(failures);
+                throw new ApplicationValidationException(failures);
         }
         return await next();
     }

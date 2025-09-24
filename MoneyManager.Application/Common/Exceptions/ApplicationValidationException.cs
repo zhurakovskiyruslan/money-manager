@@ -2,11 +2,11 @@ using FluentValidation.Results;
 
 namespace MoneyManager.Application.Common.Exceptions;
 
-public class ValidationException : Exception
+public class ApplicationValidationException : Exception
 {
     public IDictionary<string, string[]> Errors { get; }
 
-    public ValidationException(IEnumerable<ValidationFailure> failures)
+    public ApplicationValidationException(IEnumerable<ValidationFailure> failures)
         : base("Validation failed")
     {
         Errors = failures

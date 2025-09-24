@@ -3,6 +3,7 @@
     using Microsoft.AspNetCore.Builder;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
+    using MoneyManager.API.Middlewares;
     using MoneyManager.Application.Accounts.Commands.CreateAccount;
     using MoneyManager.Application.Common.Behaviors;
     using MoneyManager.Infrastructure;
@@ -26,7 +27,7 @@
 
     var app = builder.Build();
 
-   
+    app.UseMiddleware<ExceptionHandlingMiddleware>();
         app.UseSwagger();
         app.UseSwaggerUI(c =>
         {
@@ -36,7 +37,7 @@
     
 
     app.UseAuthorization();
-
+   
     app.MapControllers();
 
     app.Run();
