@@ -39,6 +39,9 @@ public class UpdateTransactionHandler : IRequestHandler<UpdateTransactionCommand
         
         var categoryType =
             await _category.GetCategoryTypeAsync(transaction.SharedCategoryId, transaction.CustomCategoryId, ct);
+        var newCategoryType = await _category.GetCategoryTypeAsync(request.SharedCategoryId, request.CustomCategoryId, ct);
+        if (newCategoryType != categoryType)
+            throw new ConflictException("Category type doesn't match.");
         
         if (request.AccountId == oldAccount.Id)
         {
@@ -50,7 +53,10 @@ public class UpdateTransactionHandler : IRequestHandler<UpdateTransactionCommand
         else
         {
             var newAccount = await _accountRepositoryRead.GetByIdAsync(request.AccountId, ct);
-            if (newAccount == null) throw new NotFoundException("Account not found");
+            if (newAccount == null) 
+                throw new NotFoundException("Account not found");
+            if (newAccount.Currency != oldAccount.Currency) 
+                throw new ConflictException("Accounts have different currencies");
             if (categoryType == CategoryType.Expense)
             {
                 oldAccount.Balance += transaction.Amount;
