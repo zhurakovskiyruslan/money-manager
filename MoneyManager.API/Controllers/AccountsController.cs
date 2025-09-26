@@ -1,6 +1,6 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using MoneyManager.API.Contracts.Accounts;
+using MoneyManager.API.Contracts.UpdateRequests;
 using MoneyManager.Application.Accounts.Commands.CreateAccount;
 using MoneyManager.Application.Accounts.Commands.DeleteAccount;
 using MoneyManager.Application.Accounts.Commands.UpdateAccount;

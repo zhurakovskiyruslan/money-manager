@@ -1,6 +1,6 @@
 using MoneyManager.Domain.Enums;
 
-namespace MoneyManager.API.Contracts.Accounts;
+namespace MoneyManager.API.Contracts.UpdateRequests;
 
 public record UpdateAccountRequest(
     Guid UserId,

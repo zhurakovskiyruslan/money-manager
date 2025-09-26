@@ -1,6 +1,6 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using MoneyManager.API.Contracts.Accounts;
+using MoneyManager.API.Contracts.UpdateRequests;
 using MoneyManager.Application.Users.Commands.CreateUser;
 using MoneyManager.Application.Users.Commands.DeleteUser;
 using MoneyManager.Application.Users.Commands.UpdateUser;
@@ -40,7 +40,7 @@ public class UsersController : ControllerBase
     }
     
     [HttpDelete("{id:guid}")]
-    public async Task<IActionResult> Delete(Guid id, CancellationToken ct)
+    public async Task<IActionResult> DeleteUser(Guid id, CancellationToken ct)
     {
         await _mediator.Send(new DeleteUserCommand(id), ct);
         return NoContent();

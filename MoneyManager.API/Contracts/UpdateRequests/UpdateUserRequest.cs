@@ -1,4 +1,4 @@
-namespace MoneyManager.API.Contracts.Accounts;
+namespace MoneyManager.API.Contracts.UpdateRequests;
 
 public record UpdateUserRequest(
     string Name,
