@@ -4,8 +4,10 @@
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using MoneyManager.API.Middlewares;
+    using MoneyManager.Application.Abstractions.Services;
     using MoneyManager.Application.Accounts.Commands.CreateAccount;
     using MoneyManager.Application.Common.Behaviors;
+    using MoneyManager.Application.Services;
     using MoneyManager.Infrastructure;
 
     
@@ -20,7 +22,7 @@
     builder.Services.AddValidatorsFromAssembly(typeof(CreateAccountCommandValidator).Assembly);
     
     builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
-    
+    builder.Services.AddScoped<ICategoryLookup, CategoryLookup>();
     var cs = builder.Configuration.GetConnectionString("DefaultConnection")
              ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
     builder.Services.AddInfrastructure(cs);
