@@ -24,7 +24,7 @@ public class CreateCustomCategoryHandler : IRequestHandler<CreateCustomCategoryC
         var category = new CustomCategory
         {
             UserId = request.UserId,
-            Title = request.Title,
+            Title = request.Title.ToLower(),
             Type = request.Type
         };
         await _writeCategory.AddAsync(category, ct);
