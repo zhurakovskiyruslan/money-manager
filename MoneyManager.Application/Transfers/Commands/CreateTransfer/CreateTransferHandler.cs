@@ -29,8 +29,6 @@ public class CreateTransferHandler : IRequestHandler<CreateTransferCommand, Guid
                             throw new NotFoundException("Source account not found");
         var destinationAccount = await _accountRepositoryRead.GetByIdAsync(request.DestinationAccountId, ct)??
                                  throw new NotFoundException("Destination account not found");
-        if(sourceAccount.Balance < request.SourceAmount) 
-            throw new ConflictException("Source account balance is less than amount of operation");
         if(sourceAccount.UserId != request.UserId || destinationAccount.UserId != request.UserId)
             throw new ForbiddenException("Account does not belong to user.");
         sourceAccount.Balance -= request.SourceAmount;
