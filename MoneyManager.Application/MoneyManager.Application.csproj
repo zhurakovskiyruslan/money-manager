@@ -12,6 +12,9 @@
 
     <ItemGroup>
       <Folder Include="Accounts\Queries\" />
+      <Folder Include="CustomCategories\Commands\" />
+      <Folder Include="CustomCategories\Queries\" />
+      <Folder Include="SharedCategories\Queries\" />
       <Folder Include="Transactions\Queries\" />
       <Folder Include="Transfers\Queries\" />
       <Folder Include="Users\Queries\" />
