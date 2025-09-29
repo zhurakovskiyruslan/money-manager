@@ -21,7 +21,7 @@ public class AccountsController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Post([FromBody] CreateAccountCommand command,  CancellationToken ct)
     {
-        var result = await _mediator.Send(command);
+        var result = await _mediator.Send(command, ct);
         return Ok(result);
     }
 

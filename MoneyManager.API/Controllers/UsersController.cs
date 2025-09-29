@@ -19,14 +19,16 @@ public class UsersController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateUser([FromBody] CreateUserCommand command)
+    public async Task<IActionResult> CreateUser([FromBody] CreateUserCommand command,
+        CancellationToken ct)
     {
-        var result = await _mediator.Send(command);
+        var result = await _mediator.Send(command, ct);
         return Ok(result);
     }
 
     [HttpPut("{id:guid}")]
-    public async Task<IActionResult> UpdateUser(Guid id, [FromBody] UpdateUserRequest request)
+    public async Task<IActionResult> UpdateUser(Guid id, [FromBody] UpdateUserRequest request,
+        CancellationToken ct)
     {
         var cmd = new UpdateUserCommand(
             id,
@@ -35,7 +37,7 @@ public class UsersController : ControllerBase
             request.BaseCurrency,
             request.TimeZone
         );
-        var result = await _mediator.Send(cmd);
+        var result = await _mediator.Send(cmd, ct);
         return Ok(result);
     }
     
