@@ -29,7 +29,7 @@ public class AppDbContext : DbContext
             entity.HasIndex(a => new { a.UserId, a.Title }).IsUnique();
 
             entity.Property(a => a.Title).IsRequired().HasMaxLength(100);
-            entity.Property(a => a.Currency).IsRequired().HasMaxLength(3);
+            entity.Property(a => a.Currency).IsRequired().HasMaxLength(4);
             entity.Property(a => a.Balance).HasPrecision(18, 2);
             entity.Property(a => a.Type).HasConversion<string>();
 
@@ -48,7 +48,7 @@ public class AppDbContext : DbContext
             entity.HasOne(t => t.Account)
                 .WithMany(a => a.Transactions)
                 .HasForeignKey(t => t.AccountId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
 
             entity.HasOne(t => t.SharedCategory)
                 .WithMany(c => c.Transactions)
