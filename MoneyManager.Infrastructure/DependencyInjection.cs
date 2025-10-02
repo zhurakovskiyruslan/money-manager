@@ -14,7 +14,11 @@ public static class DependencyInjection
         services.AddScoped(typeof(IWriteRepository<>), typeof(EfWriteRepository<>));
         services.AddScoped(typeof(IReadRepository<>), typeof(EfReadRepository<>));
         services.AddScoped<IUnitOfWork, EfUnitOfWork>();
-        
+        services.AddScoped<IAccountRepository, AccountRepository>();
+        services.AddScoped<ITransactionRepository, TransactionRepository>();
+        services.AddScoped<ITransferRepository, TransferRepository>();
+        services.AddScoped<ICustomCategoryRepository, CustomCategoryRepository>();
+        services.AddScoped<ISharedCategoryRepository, SharedCategoryRepository>();
         return services;
     }
 }
