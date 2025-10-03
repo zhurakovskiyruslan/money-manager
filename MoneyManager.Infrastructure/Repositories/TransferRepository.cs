@@ -12,9 +12,13 @@ public class TransferRepository : ITransferRepository
     {
         _context = context;
     }
-    public async Task<IReadOnlyList<Transfer>> GetTransfersAsync(Guid userId, CancellationToken ct)
+    public async Task<IReadOnlyList<Transfer>> GetTransfersAsync(Guid userId, 
+        DateTimeOffset from, DateTimeOffset to,CancellationToken ct)
     {
         return await _context.Transfers.Where(t=>t.UserId == userId)
+            .Where(t => t.OccurredAt>= from && t.OccurredAt <= to)
+            .Include(t => t.DestinationAccount)
+            .Include(t => t.SourceAccount)
             .AsNoTracking()
             .ToListAsync(ct);
     }

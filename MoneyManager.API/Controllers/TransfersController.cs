@@ -4,6 +4,7 @@ using MoneyManager.API.Contracts.UpdateRequests;
 using MoneyManager.Application.Transfers.Commands.CreateTransfer;
 using MoneyManager.Application.Transfers.Commands.DeleteTransfer;
 using MoneyManager.Application.Transfers.Commands.UpdateTransfer;
+using MoneyManager.Application.Transfers.Queries;
 
 namespace MoneyManager.API.Controllers;
 
@@ -47,5 +48,13 @@ public class TransfersController : ControllerBase
     {
         await _mediator.Send(new DeleteTransferCommand(id), ct);
         return NoContent();
+    }
+
+    [HttpGet("{userId:Guid}")]
+    public async Task<IActionResult> GetTransfer(Guid userId, 
+        [FromQuery] DateTimeOffset from, DateTimeOffset to, CancellationToken ct)
+    {
+        var result = await _mediator.Send(new GetTransfersQuery(userId, from, to), ct);
+        return Ok(result);
     }
 }
