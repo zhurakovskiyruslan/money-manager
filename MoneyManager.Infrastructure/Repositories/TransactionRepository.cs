@@ -12,10 +12,15 @@ public class TransactionRepository : ITransactionRepository
     {
         _context = context;
     }
-    public async Task<IReadOnlyList<Transaction>> GetUserTransactionsAsync(Guid userId, CancellationToken ct)
+    public async Task<IReadOnlyList<Transaction>> GetUserTransactionsAsync(Guid userId, 
+        DateTimeOffset from, DateTimeOffset to, CancellationToken ct)
     {
-        return await _context.Transactions.Include(t=> t.Account)
+        return await _context.Transactions
+            .Where(t=> t.OccurredAt >= from && t.OccurredAt <= to)
+            .Include(t=> t.Account)
             .Where(t=> t.Account.UserId == userId)
+            .Include(t=>t.SharedCategory)
+            .Include(t => t.CustomCategory)
             .AsNoTracking()
             .ToListAsync(ct);
         
