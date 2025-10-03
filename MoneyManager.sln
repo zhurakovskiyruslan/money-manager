@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoneyManager.Application", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoneyManager.API", "MoneyManager.API\MoneyManager.API.csproj", "{F0CB17D2-8E87-424A-82A1-C28AFF2B91DD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoneyManager.Auth", "MoneyManager.Auth\MoneyManager.Auth.csproj", "{01C743F2-5123-49F0-BA88-0960797D8D34}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{F0CB17D2-8E87-424A-82A1-C28AFF2B91DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F0CB17D2-8E87-424A-82A1-C28AFF2B91DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F0CB17D2-8E87-424A-82A1-C28AFF2B91DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01C743F2-5123-49F0-BA88-0960797D8D34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01C743F2-5123-49F0-BA88-0960797D8D34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01C743F2-5123-49F0-BA88-0960797D8D34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01C743F2-5123-49F0-BA88-0960797D8D34}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
