@@ -1,3 +1,3 @@
-namespace MoneyManager.Auth.Controllers;
+namespace MoneyManager.Auth.DTO;
 
 public record LoginResultDto(string AccessToken);

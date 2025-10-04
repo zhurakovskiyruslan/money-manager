@@ -64,7 +64,6 @@ builder.Services.AddSwaggerGen(c =>
 
     c.AddSecurityDefinition("Bearer", scheme);
 
-    // Глобально требуем Bearer для всех операций, где это уместно
     c.AddSecurityRequirement(new OpenApiSecurityRequirement
     {
         {

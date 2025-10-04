@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using MoneyManager.Auth.DTO;
 using MoneyManager.Auth.Entities;
 using MoneyManager.Auth.Services;
 
