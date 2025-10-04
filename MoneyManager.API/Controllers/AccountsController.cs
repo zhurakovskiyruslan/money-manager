@@ -4,6 +4,7 @@ using MoneyManager.API.Contracts.UpdateRequests;
 using MoneyManager.Application.Accounts.Commands.CreateAccount;
 using MoneyManager.Application.Accounts.Commands.DeleteAccount;
 using MoneyManager.Application.Accounts.Commands.UpdateAccount;
+using MoneyManager.Application.Accounts.Queries;
 
 namespace MoneyManager.API.Controllers;
 
@@ -19,14 +20,14 @@ public class AccountsController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Post([FromBody] CreateAccountCommand command,  CancellationToken ct)
+    public async Task<IActionResult> AddAccount([FromBody] CreateAccountCommand command,  CancellationToken ct)
     {
         var result = await _mediator.Send(command, ct);
         return Ok(result);
     }
 
     [HttpPut("{id:guid}")]
-    public async Task<IActionResult> Put(Guid id, [FromBody] UpdateAccountRequest request ,CancellationToken ct)
+    public async Task<IActionResult> UpdateAccount(Guid id, [FromBody] UpdateAccountRequest request ,CancellationToken ct)
     {
         var cmd = new UpdateAccountCommand(
             id,
@@ -41,9 +42,16 @@ public class AccountsController : ControllerBase
     }
 
     [HttpDelete("{id:guid}")]
-    public async Task<IActionResult> Delete(Guid id, CancellationToken ct)
+    public async Task<IActionResult> DeleteAccount(Guid id, CancellationToken ct)
     {
         await _mediator.Send(new DeleteAccountCommand(id), ct);
         return NoContent();
+    }
+
+    [HttpGet("{userId:guid}")]
+    public async Task<IActionResult> GetAccounts(Guid userId, CancellationToken ct)
+    {
+        var result = await _mediator.Send(new GetAccountsQuery(userId), ct);
+        return Ok(result);
     }
 }
